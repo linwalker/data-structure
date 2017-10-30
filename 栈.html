@@ -30,7 +30,7 @@
 		function length() {
 			return this.top;
 		}
-
+		//数制转换
 		function numBase(target, base) {
 			var s = new Stack();
 			do {
@@ -43,7 +43,7 @@
 			}
 			return result;
 		}
-
+		// 回文
 		function isPalindrome(word) {
 			var s = new Stack();
 
@@ -60,6 +60,20 @@
 				return false;
 			}
 		}
+		// 递归
+		function factorial(n) {
+			var s =  new Stack();
+			var result = 1;
+			while(n > 1) {
+				s.push(n--);
+				console.log('length', s.length());
+			}
+			while(s.length() > 0) {
+				result *=s.pop();
+			}
+			return result;
+		}
+		console.log(factorial(5));
 	</script>
 </body>
 </html>
