@@ -1,0 +1,148 @@
+
+</!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<h3>链表</h3>
+</body>
+<script>
+	function List() {
+		this.pos = 0;
+		this.dataSource = [];
+		this.listSize = 0;
+		this.length = length;
+		this.find = find;
+		this.contains = contains;
+		this.clear = clear;
+		this.toString = toString;
+		this.getElement = getElement;
+		this.insert = insert;
+		this.append = append;
+		this.remove = remove;
+		this.front = front;
+		this.end = end;
+		this.prev = prev;
+		this.next = next;
+		this.currPos = currPos;
+		this.moveTo = moveTo;
+	}
+	function append(element) {
+		this.dataSource[this.listSize++] = element;
+	}
+	function find(element) {
+		return this.dataSource.indexOf(element)
+	}
+	function remove(element) {
+		var index = this.find(element);
+		if (index > -1) {
+			this.dataSource.splice(index,1);
+			--this.listSize;
+			return true;
+		} else {
+			return false;
+		}
+	}
+	function length() {
+		return this.listSize;
+	}
+	function toString() {
+		return this.dataSource;
+	}
+	function insert(element, after) {
+		var index = this.find(after);
+		if (index > -1) {
+			this.dataSource.splice(index+1, 0, element);
+			this.listSize++;
+			return true;
+		}else {
+			return false;
+		}
+	}
+	function clear() {
+		delete this.dataSource;
+		this.dataSource = [];
+		this.listSize = this.pos = 0;
+	}
+	function contains(element) {
+		var index = this.dataSource.indexOf(element);
+		if (index > -1) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	function front() {
+		this.pos = 0;
+	}
+	function end() {
+		this.pos = this.listSize - 1;
+	}
+	function prev() {
+		if (this.pos > 0) {
+			--this.pos;
+		}
+	}
+	function next() {
+		if (this.pos < this.listSize-1) {
+			++this.pos;
+		}
+	}
+	function currPos() {
+		return this.pos;
+	}
+	function moveTo(position) {
+		this.pos = position;
+	}
+	function getElement() {
+		return this.dataSource[this.pos];
+	}
+	var movies = [
+		'The Shawshank Redemption',
+		'The Godfather',
+		'The Godfather: Part II',
+		'Pulp Fiction',
+	];
+	function display(list) {
+		for (var i = list.listSize;i--;) {
+			console.log(list.dataSource[i]);
+		}
+	}
+	var moviesList = new List();
+	for (var i = movies.length;i--;){
+		moviesList.append(movies[i]);
+	}
+	console.log('Available movies: \n');
+	display(moviesList);
+	var customerList = new List();
+	function Customer(name, movie) {
+		this.name = name;
+		this.movie = movie;
+	}
+	function checkOut(name, movie, moviesList, customerList) {
+		if (moviesList.contains(movie)) {
+			var c = new Customer(name, movie);
+			customerList.append(c);
+			moviesList.remove(movie);
+		} else {
+			console.log(movie + ' is not available');
+		}
+	}
+	checkOut('lin', 'The Godfather', moviesList, customerList);
+	checkOut('lin', 'Pulp Fiction', moviesList, customerList);
+	console.log('customerList');
+	display(customerList);
+	console.log('moviesList after checkOut');
+	display(moviesList);
+	function checkIn(name, movie, moviesList, customerList) {
+		customerList.remove({name:name,movie:movie});
+		moviesList.append(movie);
+	}
+	checkIn('lin', 'The Godfather', moviesList, customerList);
+	console.log('customerList');
+	display(customerList);
+	console.log('moviesList after checkIn');
+	display(moviesList);
+</script>
+</html>

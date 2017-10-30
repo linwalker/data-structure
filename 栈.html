@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<script>
+		function Stack() {
+			this.dataSource = [];
+			this.top = 0;
+			this.push = push;
+			this.pop = pop;
+			this.peek = peek;
+			this.clear = clear;
+			this.length = length;
+		}
+		function push(element) {
+			this.dataSource[this.top++] = element;
+		}
+		function pop() {
+			return this.dataSource[--this.top];
+		}
+		function peek() {
+			return this.dataSource[this.top-1];
+		}
+		function clear() {
+			this.top = 0;
+		}
+		function length() {
+			return this.top;
+		}
+
+		function numBase(target, base) {
+			var s = new Stack();
+			do {
+				s.push(target%base);
+				target = Math.floor(target/base);
+			}while(target>0)
+			var result;
+			while(s.length > 0) {
+				result = result + s.pop();
+			}
+			return result;
+		}
+
+		function isPalindrome(word) {
+			var s = new Stack();
+
+			for (var i = 0; i < word.length; i++) {
+				s.push(word[i])
+			}
+			var new_word = '';
+			while(s.length > 0) {
+				new_word += s.pop();
+			}
+			if(new_word === word) {
+				return ture;
+			} else {
+				return false;
+			}
+		}
+	</script>
+</body>
+</html>
