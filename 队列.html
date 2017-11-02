@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>队列</title>
+</head>
+<body>
+    <script>
+        function Queue() {
+            this.dataSource = [];
+            this.enqueue = enqueue;
+            this.dequeue = dequeue;
+            this.henqueue = henqueue;
+            this.dhequeue = dhequeue;
+            this.front = front;
+            this.back = back;
+            this.toString = toString;
+            this.empty = empty;
+        }
+        function enqueue(element) {
+            this.dataSource.push(element);
+        }
+        function dequeue() {
+            return this.dataSource.shift();
+        }
+        function henqueue(element) {
+            this.dataSource.unshift(element);
+        }
+        function dhequeue() {
+            return this.dataSource.pop();
+        }
+        function front() {
+            return this.dataSource[0];
+        }
+        function back() {
+            return this.dataSource[this.dataSource.length -1];
+        }
+        function toString() {
+            var result = '';
+            for (var index = 0; index < this.dataSource.length; index++) {
+                result += this.dataSource[index] + "\n";
+            }
+            return result;
+        }
+        function empty() {
+            if (this.dataSource.length ===0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        function count() {
+            return this.dataSource.length;
+        }
+
+        var q = new Queue();
+        var word = 'linyuhuauhuynil';
+        for(var i = 0; i < word.length; i++) {
+            q.enqueue(word[i]);
+        }
+        function wordTest(word, queue) {
+            var str = '';
+            var len = queue.dataSource.length;
+            for(var i = 0; i < len; i++) {
+                str += queue.dhequeue();
+            }
+            if (word === str) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        console.log(wordTest(word, q));
+    </script>
+</body>
+</html>
